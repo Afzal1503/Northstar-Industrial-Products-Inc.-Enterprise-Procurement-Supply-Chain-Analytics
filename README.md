@@ -159,6 +159,9 @@ Provides management-level visibility into:
 * Contracts
 * Inventory activity
 
+  <img width="1181" height="666" alt="Screenshot 2026-09-22 115114" src="https://github.com/user-attachments/assets/c1e6e940-0ef2-4318-ad0e-daca6f84f850" />
+
+
 ### 2. Supplier & Procurement
 
 Focuses on:
