@@ -209,6 +209,9 @@ Provides analysis of:
 * Discounts
 * Customer and regional activity
 
+**See:** [`documentation/power-bi-solution.md`](documentation/power-bi-solution.md)
+
+
 ---
 
 ## Shipment Fulfillment Analysis
