@@ -309,22 +309,6 @@ The completed solution provides:
 
 ---
 
-## Repository Structure
-
-```text
-Northstar-Industrial-Products-Analytics/
-│
-├── README.md
-├── documentation/
-├── python/
-├── dax/
-├── architecture/
-└── screenshots/
-```
-
-Supporting documentation provides additional detail on the data model, engineering workflow, data-quality framework, Power BI implementation, and business insights.
-
----
 
 ## Project Scope & Data Note
 
