@@ -310,6 +310,9 @@ The completed solution provides:
 * Reusable DAX-based analytical measures
 * A documented approach to handling complex filter-context requirements
 
+**See:** [`documentation/business-insights.md`](documentation/business-insights.md)
+
+
 ---
 
 
