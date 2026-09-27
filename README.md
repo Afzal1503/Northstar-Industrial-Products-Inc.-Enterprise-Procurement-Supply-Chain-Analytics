@@ -2,51 +2,32 @@
 
 ## Project Overview
 
-Northstar Industrial Products Inc. is a synthetic Canadian manufacturing and distribution business used to develop an enterprise-style procurement, supply chain, inventory, sales, and operational analytics solution.
+Northstar Industrial Products Inc. is a fictional Canadian manufacturing and distribution company created for an enterprise-style analytics case study.
 
-The project was designed around the types of analytical requirements a CFO, Procurement Director, Supply Chain Manager, Finance/AP Manager, and operational teams would use to monitor purchasing activity, supplier performance, inventory movement, shipment fulfillment, and sales operations.
+The project focuses on transforming large-scale procurement, supplier, inventory, shipment, customer, and sales data into a management-oriented Power BI analytics solution.
 
-The solution combines **Python-based data engineering and validation, dimensional data modeling, and Power BI analytics** into an end-to-end analytical workflow.
-
----
-
-## Business Problem
-
-Northstar manages large volumes of procurement, contract, inventory, sales, supplier, customer, and warehouse transactions.
-
-The objective of the project was to create a structured analytical environment that could help management answer questions such as:
+The project was built around six business questions:
 
 1. Where are the largest procurement cost opportunities?
-2. Which suppliers provide the best overall value and performance?
-3. Where are procurement cost leakages or purchasing-control issues?
-4. Where are supply and inventory risks?
-5. Where are invoice, transaction, or purchasing-control discrepancies?
-6. What actions should management consider based on the analysis?
+2. Which suppliers provide the strongest overall value and performance?
+3. Where are procurement cost leakage and purchasing-control issues?
+4. Where are the major inventory and supply risks?
+5. Where are shipment fulfillment exceptions?
+6. What actions should management investigate based on the analysis?
 
 ---
 
 ## Solution
 
-The final solution consists of:
+The final solution combines:
 
-* Large-scale synthetic enterprise datasets
-* A **13-table dimensional data model**
-* Python-based data generation and validation
-* Business-rule and data-quality certification
-* Power BI analytical dashboards
-* DAX-based measures and filter-context management
-* Cross-table analysis using `TREATAS`
-* A dedicated shipment-fulfillment analytical table for fulfillment analysis
+**Business Requirements → Data Engineering → Dimensional Modeling → Data Quality Certification → Power BI → Business Insights**
 
-The solution was developed iteratively, with data modeling, engineering, validation, and dashboard logic tested and corrected throughout the project.
+The certified analytical model contains 13 tables and more than 7.3 million rows.
 
----
+### Dataset Scale
 
-## Dataset Scale
-
-The final certified dataset contains:
-
-| Area                   |    Volume |
+| Area                   |     Scale |
 | ---------------------- | --------: |
 | Products               |    20,000 |
 | Suppliers              |       500 |
@@ -58,189 +39,149 @@ The final certified dataset contains:
 | Sales Order Lines      |   995,367 |
 | Inventory Transactions | 3,000,000 |
 | Warehouses             |        10 |
-| Date Records           |     1,461 |
-
-The model contains **13 tables** covering master data, transactional data, contracts, purchasing, sales, inventory, and warehouse information.
+| Dates                  |     1,461 |
 
 ---
 
 ## Data Model
 
-The analytical model follows a dimensional/star-schema approach with separate fact and dimension tables.
+The final dimensional model contains:
 
-### Dimension Tables
+### Dimensions
 
-* `dim_date`
-* `dim_category`
-* `dim_product`
-* `dim_supplier`
-* `dim_customer`
-* `dim_contract`
-* `dim_warehouse`
+* Date
+* Category
+* Product
+* Supplier
+* Customer
+* Contract
+* Warehouse
 
 ### Fact Tables
 
-* `fact_contract_line`
-* `fact_purchase_order`
-* `fact_purchase_order_line`
-* `fact_sales_order`
-* `fact_sales_order_line`
-* `fact_inventory_transaction`
+* Contract Lines
+* Purchase Orders
+* Purchase Order Lines
+* Sales Orders
+* Sales Order Lines
+* Inventory Transactions
 
-The warehouse dimension was incorporated to provide a dedicated structure for warehouse-level inventory analysis rather than embedding warehouse attributes directly within transactional data.
-
-**See:** [`documentation/data-model.md`](documentation/data-model.md)
-
----
-
-## Data Engineering
-
-Python was used to generate and validate the synthetic enterprise datasets and to support the data engineering workflow.
-
-The engineering process covered:
-
-* Master-data generation
-* Transaction generation
-* Primary and foreign-key relationships
-* Date dimensions
-* Procurement and contract transactions
-* Sales and customer transactions
-* Inventory movements
-* Warehouse activity
-* Business-rule validation
-* Data-quality testing
-
-The final datasets were prepared for analytical consumption in Power BI.
-
-**See:** [`documentation/data-engineering.md`](documentation/data-engineering.md)
-
----
-
-## Data Quality & Certification
-
-Data quality was treated as a core part of the project rather than a final cleanup step.
-
-Validation included:
-
-* Referential integrity
-* Primary/foreign-key consistency
-* Duplicate detection
-* Null checks
-* Date validation
-* Transaction consistency
-* Business-rule validation
-* Inventory transaction validation
-* Shipment and fulfillment validation
-
-The project progressed through multiple validation checkpoints, including **Stage 4.5** and the final **Stage 4.7 certification**.
-
-### Final Certification
-
-**0 exceptions identified in the final certification.**
-
-This certification reflects the final project state after corrections and validation.
-
-**See:** [`documentation/data-quality.md`](documentation/data-quality.md)
+The model was designed to support reusable filtering across procurement, inventory, shipment, and sales analysis while avoiding ambiguous fact-to-fact relationships.
 
 ---
 
 ## Power BI Solution
 
-The final Power BI solution contains five analytical pages.
+The final Power BI report contains five analytical pages:
 
 ### 1. Executive Overview
 
 Provides management-level visibility into:
 
-* Sales
-* Procurement
-* Purchase orders
-* Sales orders
-* Contracts
-* Inventory activity
+* Total Sales
+* Total Purchase Value
+* Sales Order Count
+* Purchase Order Count
+* Active Contract Count
+* Inventory Transaction Count
+* Contract discount analysis
 
 ### 2. Supplier & Procurement
 
-Focuses on:
+Analyzes:
 
-* Procurement spend
-* Purchase quantities
-* Purchase orders
-* Supplier activity
-* Unit cost
-* Purchase lead time
-* Supplier/category analysis
+* Purchase Value
+* Purchase Quantity
+* Purchase Orders
+* Average Unit Cost
+* Average Purchase Lead Time
+* Active Suppliers
 
 ### 3. Inventory Management
 
 Analyzes:
 
-* Inventory movements
-* Purchase receipts
-* Sales shipments
-* Customer and supplier returns
-* Inventory adjustments
-* Stock transfers
-* Inventory exposure
-* Inventory risk indicators
+* Inventory Transaction Value
+* Net Inventory Movement
+* Purchase Receipts
+* Sales Shipments
+* Inventory Adjustments
+* Stock Transfers
+* Returns
+* Inventory exposure and risk
 
 ### 4. Shipment & Logistics
 
 Analyzes:
 
-* Order status
-* Shipment fulfillment
-* Order priority
-* Shipping regions
-* Quantity shortfalls
-* Fulfillment trends
-
-The final shipment analysis found that **98.32% of eligible orders were both on time and complete**, while **1.68% experienced quantity shortfalls**.
+* Order Status
+* Order Priority
+* Shipping Region
+* Shipment Fulfillment
+* Quantity Shortfalls
+* Monthly Fulfillment Performance
 
 ### 5. Customer & Sales
 
-Provides analysis of:
+Analyzes:
 
-* Sales performance
-* Sales orders
-* Sales quantities
-* Average order value
-* Sales pricing
-* Discounts
-* Customer and regional activity
-
-**See:** [`documentation/power-bi-solution.md`](documentation/power-bi-solution.md)
-
+* Total Sales
+* Gross Sales
+* Sales Quantity
+* Sales Orders
+* Average Order Value
+* Average Sales Price
+* Sales Discounts
+* Customer and product activity
 
 ---
 
-## Shipment Fulfillment Analysis
+## Key Validated Finding
 
-A dedicated `Shipment Fulfillment` analytical table was created to evaluate order-level shipment performance without introducing ambiguous relationships into the core model.
+Shipment fulfillment was independently validated against the underlying data.
 
-The analysis evaluates:
+Among **281,882 eligible orders**:
 
-* Required shipment date
-* Final shipment date
-* Ordered quantity
-* Shipped quantity
-* Timeliness
-* Fulfillment completeness
-* Order status
-* Order priority
-* Shipping region
+| Fulfillment Result |  Orders |
+| ------------------ | ------: |
+| On Time & Complete | 277,152 |
+| On Time & Short    |   4,730 |
+| Late & Complete    |       0 |
+| Late & Short       |       0 |
 
-The final validated population contained **281,882 eligible orders**.
+### Result
 
-Results:
+* **100%** of eligible orders were on time
+* **98.32%** were both on time and complete
+* **1.68%** were on time but short
+* **50,601 units** were short across affected orders
 
-* **277,152 — On Time & Complete**
-* **4,730 — On Time & Short**
-* **0 — Late & Complete**
-* **0 — Late & Short**
-* **50,601 total units short**
+The analysis therefore identified **quantity completeness rather than shipment timing** as the primary fulfillment exception.
 
-This showed that shipment timing was consistently on schedule in the validated dataset, while quantity shortfalls represented the primary fulfillment exception.
+---
+
+## Data Quality & Certification
+
+Data quality was treated as a core part of the solution.
+
+Validation included:
+
+* Row-count validation
+* Primary-key validation
+* Referential integrity
+* Duplicate checks
+* Null checks
+* Date validation
+* Business-rule validation
+* Inventory transaction validation
+* Shipment fulfillment validation
+* Power BI reconciliation
+
+### Final Certification
+
+**0 exceptions**
+
+The certification refers to the defined data-quality and business-rule validation framework. It does not mean that the business dataset contains no operational exceptions.
 
 ---
 
@@ -248,78 +189,67 @@ This showed that shipment timing was consistently on schedule in the validated d
 
 ### Dimensional Modeling
 
-A 13-table dimensional model was designed to separate master data from transactional activity and support reusable analytical dimensions.
+Built a 13-table enterprise-style dimensional model supporting procurement, inventory, shipment, and sales analysis.
 
-### DAX & Filter Context
+### DAX
 
-DAX was used to create analytical KPIs and manage filter context across the model.
+Developed management KPIs and filter-aware analytical measures using DAX.
 
 ### TREATAS
 
-`TREATAS` was used where analytical filtering needed to be transferred across tables without creating ambiguous bidirectional fact-to-fact relationships.
+Used `TREATAS` to transfer filter context into the disconnected shipment fulfillment analytical table without introducing ambiguous relationships.
 
-### Disconnected Analytical Table
+### Independent Validation
 
-The `Shipment Fulfillment` table was intentionally kept disconnected from the main model and filtered through DAX to avoid introducing ambiguous relationships while still supporting product, category, region, priority, and status analysis.
+Key dashboard results were independently validated against the underlying analytical data before final certification.
 
-### Data Validation
+### Large-Scale Data
 
-Python-based validation was used throughout development to independently verify data quality and analytical results.
+The solution was designed around millions of transactional records rather than a small demonstration dataset.
 
 ---
+
+## Business Insights
+
+The analysis provides a framework for investigating:
+
+* Procurement cost and unit-cost exposure
+* Supplier activity and lead time
+* Contract discounts and purchasing controls
+* Inventory movements and adjustments
+* Warehouse-level inventory exposure
+* Shipment fulfillment completeness
+* Sales and customer activity
+
+The project emphasizes the distinction between a **validated finding** and an area that requires further business investigation.
+
+---
+
+## Documentation
+
+Detailed project documentation is available below:
+
+* [Data Model](documentation/data-model.md) — Final 13-table dimensional model and relationship design
+* [Data Engineering](documentation/data-engineering.md) — Data-generation approach, transaction engineering, and development corrections
+* [Data Quality & Certification](documentation/data-quality.md) — Validation framework and final certification
+* [Power BI Solution](documentation/power-bi-solution.md) — Dashboard pages, KPIs, DAX, filter context, and analytical design
+* [Business Insights](documentation/business-insights.md) — Validated findings and management investigation areas
+
+---
+
 
 ## Technology Stack
 
-**Data Engineering & Analysis**
-
-* Python
-* Pandas
-* SQL
-
-**Business Intelligence**
-
-* Microsoft Power BI
-* DAX
-* Power Query
-
-**Data Modeling**
-
-* Dimensional Modeling
-* Star Schema
-* Fact & Dimension Design
-
-**Data Quality**
-
-* Referential Integrity Testing
-* Business Rule Validation
-* Duplicate & Null Checks
-* Independent Python Validation
+* **Power BI** — Dashboard development and business intelligence
+* **DAX** — Measures and analytical logic
+* **Python** — Data engineering and independent validation
+* **Dimensional Modeling** — Enterprise analytical architecture
+* **Parquet / Analytical Data Files** — Data preparation and Power BI consumption
 
 ---
 
-## Key Project Outcomes
+## Project Scope
 
-The completed solution provides:
+This is a fictional enterprise case study using synthetic data.
 
-* A scalable **13-table enterprise analytical model**
-* **3M inventory transactions** and large-scale procurement/sales datasets
-* Certified data quality with **0 final exceptions**
-* Five Power BI analytical pages
-* Cross-functional procurement, inventory, fulfillment, and sales analysis
-* Validated shipment fulfillment metrics
-* Reusable DAX-based analytical measures
-* A documented approach to handling complex filter-context requirements
-
-**See:** [`documentation/business-insights.md`](documentation/business-insights.md)
-
-
----
-
-
-## Project Scope & Data Note
-
-Northstar Industrial Products Inc. is a **synthetic business created for portfolio and analytical development purposes**.
-
-The datasets are synthetic and do not represent actual company transactions, suppliers, customers, or financial results.
-
-The project focuses on demonstrating the design and implementation of an enterprise-style analytics solution, including data engineering, modeling, validation, business intelligence, and analytical problem solving.
+The project is intended to demonstrate the analytical workflow, modeling decisions, validation approach, Power BI development, and business interpretation rather than represent the actual operations or financial performance of a real organization.
